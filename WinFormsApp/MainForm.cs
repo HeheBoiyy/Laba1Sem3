@@ -109,15 +109,14 @@ namespace WinFormsApp
         /// <param name="e"></param>
         private void btnShowDistribution_Click(object sender, EventArgs e)
         {
-            if(logic.GetSpecialityDistribution().Count!=0)
+            try { logic.GetSpecialityDistribution(); }
+            catch 
             {
-                var distributionForm = new DistributionForm(logic, logic.GetSpecialityDistribution());
-                distributionForm.ShowDialog();
+                MessageBox.Show("Ошибка!Отсутствуют данные!");
+                return;
             }
-            else
-            {
-                MessageBox.Show("Отсутствуют данные для рисования графика");
-            }
+            var distributionForm = new DistributionForm(logic, logic.GetSpecialityDistribution());
+            distributionForm.ShowDialog();
         }
         /// <summary>
         /// Метод для обновления списка студентов

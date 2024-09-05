@@ -37,17 +37,15 @@ namespace WinFormsApp
         {
             string newSpeciality = txtSpeciality.Text;
             string newGroup = txtGroup.Text;
-            if (newSpeciality == string.Empty || newGroup == string.Empty)
+            try { logic.UpdateStudent(name, newSpeciality, newGroup); }
+            catch
             {
                 MessageBox.Show("Ошибка! Одно из полей пустое! Повторите заново");
+                return;
             }
-            else
-            {
-                logic.UpdateStudent(name, newSpeciality, newGroup);
-                MessageBox.Show("Данные студента обновлены.");
-                this.Close();
-            }
-            
+            logic.UpdateStudent(name, newSpeciality, newGroup);
+            MessageBox.Show("Данные студента обновлены.");
+            this.Close();
         }
     }
 }

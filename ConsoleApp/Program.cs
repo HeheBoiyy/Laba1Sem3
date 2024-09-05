@@ -31,6 +31,12 @@ namespace ConsoleApp
                         ListStudents(logic);
                         break;
                     case "5":
+                        try { var testdata = logic.GetSpecialityDistribution(); }
+                        catch
+                        {
+                            Console.WriteLine("Ошибка!");
+                            break;
+                        }
                         var data = logic.GetSpecialityDistribution();
                         ShowDistribution(data);
                         break;
@@ -52,8 +58,12 @@ namespace ConsoleApp
 
             Console.Write("Введите группу студента: ");
             string group = Console.ReadLine();
-
-            logic.AddStudent(name, speciality, group);
+            try {logic.AddStudent(name, speciality, group); }
+            catch
+            {
+                Console.WriteLine("Ошибка! Одно из полей пустое");
+                return;
+            }
             Console.WriteLine("Студент добавлен.");
         }
         /// <summary>
@@ -65,7 +75,12 @@ namespace ConsoleApp
             Console.Write("Введите имя студента для удаления: ");
             string name = Console.ReadLine();
 
-            logic.RemoveStudent(name);
+            try { logic.RemoveStudent(name); }
+            catch
+            {
+                Console.WriteLine("Ошибка!");
+                return;
+            }
             Console.WriteLine("Студент удален.");
         }
         /// <summary>
@@ -81,9 +96,15 @@ namespace ConsoleApp
             string speciality = Console.ReadLine();
 
             Console.Write("Введите новую группу: ");
+
             string group = Console.ReadLine();
 
-            logic.UpdateStudent(name, speciality, group);
+            try { logic.UpdateStudent(name, speciality, group); }
+            catch
+            {
+                Console.WriteLine("Ошибка! Одно из полей пустое");
+                return;
+            }
             Console.WriteLine("Данные студента обновлены.");
         }
         /// <summary>
@@ -93,9 +114,16 @@ namespace ConsoleApp
         static void ListStudents(Logic logic)
         {
             Console.WriteLine("Список студентов:");
-            foreach (var student in logic.GetAllStudents())
+            if (logic.GetAllStudents().Count > 0)
             {
-                Console.WriteLine($"Имя: {student.Name}, Специальность: {student.Speciality}, Группа: {student.Group}");
+                foreach (var student in logic.GetAllStudents())
+                {
+                    Console.WriteLine($"Имя: {student.Name}, Специальность: {student.Speciality}, Группа: {student.Group}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Студентов нет");
             }
         }
         /// <summary>
@@ -104,6 +132,7 @@ namespace ConsoleApp
         /// <param name="logic">Бизнес логика</param>
         static void ShowDistribution(Dictionary<string,int> data)
         {
+            
             var chart = new BarChart().Width(60).Label("[green bold]Гистограмма[/]");
             foreach (var entry in data)
             {

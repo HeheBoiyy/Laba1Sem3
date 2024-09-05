@@ -34,16 +34,14 @@ namespace WinFormsApp
             string name = txtName.Text;
             string speciality = txtSpeciality.Text;
             string group = txtGroup.Text;
-            if (name == string.Empty || speciality == string.Empty || group == string.Empty)
+            try { logic.AddStudent(name, speciality, group); }
+            catch
             {
-                MessageBox.Show("Ошибка! Одно из полей пустое! Повторите заново");
+                MessageBox.Show("Ошибка!Одно из полей пустое");
+                return;
             }
-            else
-            {
-                logic.AddStudent(name, speciality, group);
-                MessageBox.Show("Студент добавлен.");
-                this.Close();
-            }
+            MessageBox.Show("Студент добавлен.");
+            this.Close();
         }
     }
 }

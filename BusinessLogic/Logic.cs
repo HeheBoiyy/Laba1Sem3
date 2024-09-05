@@ -12,8 +12,12 @@ namespace BusinessLogic
         /// <param name="group">Группа</param>
         public void AddStudent(string name, string speciality, string group)
         {
-            Student newStudent = new Student(name, speciality, group);
-            students.Add(newStudent);
+            if (name == string.Empty|| speciality == string.Empty || group == string.Empty) { throw new NotImplementedException(); }
+            else
+            {
+                Student newStudent = new Student(name, speciality, group);
+                students.Add(newStudent);
+            }
         }
         /// <summary>
         /// Удаление студента
@@ -21,10 +25,20 @@ namespace BusinessLogic
         /// <param name="name">Имя</param>
         public void RemoveStudent(string name)
         {
-            var studentToRemove = students.FirstOrDefault(s => s.Name == name);
-            if (studentToRemove != null)
+            if (name == string.Empty)
             {
-                students.Remove(studentToRemove);
+                throw new NotImplementedException();
+            }
+            else {
+                var studentToRemove = students.FirstOrDefault(s => s.Name == name);
+                if (studentToRemove != null)
+                {
+                    students.Remove(studentToRemove);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
         /// <summary>
@@ -35,11 +49,19 @@ namespace BusinessLogic
         /// <param name="newGroup">Новая Группа</param>
         public void UpdateStudent(string name, string newSpeciality, string newGroup)
         {
-            var studentToUpdate = students.FirstOrDefault(s => s.Name == name);
-            if (studentToUpdate != null)
+            if (name == string.Empty || newSpeciality == string.Empty || newGroup == string.Empty) { throw new NotImplementedException(); }
+            else
             {
-                studentToUpdate.Speciality = newSpeciality;
-                studentToUpdate.Group = newGroup;
+                var studentToUpdate = students.FirstOrDefault(s => s.Name == name);
+                if (studentToUpdate != null)
+                {
+                    studentToUpdate.Speciality = newSpeciality;
+                    studentToUpdate.Group = newGroup;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
         /// <summary>
@@ -56,8 +78,15 @@ namespace BusinessLogic
         /// <returns>Словарь string,int</returns>
         public Dictionary<string, int> GetSpecialityDistribution()
         {
-            return students.GroupBy(s => s.Speciality)
+            if(students.Count==0)
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                return students.GroupBy(s => s.Speciality)
                            .ToDictionary(g => g.Key, g => g.Count());
+            }
         }
     }
 }
