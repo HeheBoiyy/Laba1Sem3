@@ -34,7 +34,8 @@ namespace WinFormsApp
             string name = txtName.Text;
             string speciality = txtSpeciality.Text;
             string group = txtGroup.Text;
-            try { logic.AddStudent(name, speciality, group); }
+            int number = logic.GetAllStudents().Count;
+            try { logic.AddStudent(number,name, speciality, group); }
             catch
             {
                 MessageBox.Show("Ошибка!Одно из полей пустое");

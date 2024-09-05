@@ -34,22 +34,25 @@
             label3 = new Label();
             txtGroup = new TextBox();
             txtSpeciality = new TextBox();
+            label2 = new Label();
+            NameTextBox = new TextBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(108, 9);
+            label1.Location = new Point(123, 12);
             label1.Name = "label1";
-            label1.Size = new Size(163, 15);
+            label1.Size = new Size(208, 20);
             label1.TabIndex = 0;
             label1.Text = "Изменение данных студента";
             // 
             // button1
             // 
-            button1.Location = new Point(108, 110);
+            button1.Location = new Point(123, 166);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(185, 23);
+            button1.Size = new Size(211, 31);
             button1.TabIndex = 14;
             button1.Text = "Изменить";
             button1.UseVisualStyleBackColor = true;
@@ -58,46 +61,67 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(28, 62);
+            label4.Location = new Point(32, 123);
             label4.Name = "label4";
-            label4.Size = new Size(46, 15);
+            label4.Size = new Size(58, 20);
             label4.TabIndex = 13;
             label4.Text = "Группа";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(28, 33);
+            label3.Location = new Point(32, 84);
             label3.Name = "label3";
-            label3.Size = new Size(92, 15);
+            label3.Size = new Size(116, 20);
             label3.TabIndex = 12;
             label3.Text = "Специальность";
             // 
             // txtGroup
             // 
-            txtGroup.Location = new Point(254, 62);
+            txtGroup.Location = new Point(290, 123);
+            txtGroup.Margin = new Padding(3, 4, 3, 4);
             txtGroup.Name = "txtGroup";
-            txtGroup.Size = new Size(100, 23);
+            txtGroup.Size = new Size(114, 27);
             txtGroup.TabIndex = 10;
             // 
             // txtSpeciality
             // 
-            txtSpeciality.Location = new Point(254, 33);
+            txtSpeciality.Location = new Point(290, 84);
+            txtSpeciality.Margin = new Padding(3, 4, 3, 4);
             txtSpeciality.Name = "txtSpeciality";
-            txtSpeciality.Size = new Size(100, 23);
+            txtSpeciality.Size = new Size(114, 27);
             txtSpeciality.TabIndex = 9;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(32, 43);
+            label2.Name = "label2";
+            label2.Size = new Size(39, 20);
+            label2.TabIndex = 15;
+            label2.Text = "Имя";
+            // 
+            // NameTextBox
+            // 
+            NameTextBox.Location = new Point(290, 40);
+            NameTextBox.Name = "NameTextBox";
+            NameTextBox.Size = new Size(112, 27);
+            NameTextBox.TabIndex = 16;
             // 
             // UpdateStudentForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(410, 146);
+            ClientSize = new Size(469, 219);
+            Controls.Add(NameTextBox);
+            Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(txtGroup);
             Controls.Add(txtSpeciality);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UpdateStudentForm";
             Text = "Form1";
             ResumeLayout(false);
@@ -112,5 +136,7 @@
         private Label label3;
         private TextBox txtGroup;
         private TextBox txtSpeciality;
+        private Label label2;
+        private TextBox NameTextBox;
     }
 }

@@ -16,17 +16,17 @@ namespace WinFormsApp
     public partial class UpdateStudentForm : Form
     {
         private Logic logic;
-        private string name;
+        private int id;
         /// <summary>
         /// Конструктор для инициализации UpdateStudentForm
         /// </summary>
         /// <param name="logic">Бизнес логика</param>
         /// <param name="name">Имя студента</param>
-        public UpdateStudentForm(Logic logic,string name)
+        public UpdateStudentForm(Logic logic, int Id)
         {
             InitializeComponent();
             this.logic = logic;
-            this.name = name;
+            this.id = Id;
         }
         /// <summary>
         /// Метод для обновления данных о студенте
@@ -35,15 +35,15 @@ namespace WinFormsApp
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            string newname = NameTextBox.Text;
             string newSpeciality = txtSpeciality.Text;
             string newGroup = txtGroup.Text;
-            try { logic.UpdateStudent(name, newSpeciality, newGroup); }
+            try { logic.UpdateStudent(id,newname, newSpeciality, newGroup); }
             catch
             {
                 MessageBox.Show("Ошибка! Одно из полей пустое! Повторите заново");
                 return;
             }
-            logic.UpdateStudent(name, newSpeciality, newGroup);
             MessageBox.Show("Данные студента обновлены.");
             this.Close();
         }

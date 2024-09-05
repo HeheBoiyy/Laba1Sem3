@@ -10,12 +10,12 @@ namespace BusinessLogic
         /// <param name="name">Имя</param>
         /// <param name="speciality">Специальность</param>
         /// <param name="group">Группа</param>
-        public void AddStudent(string name, string speciality, string group)
+        public void AddStudent(int id,string name, string speciality, string group)
         {
             if (name == string.Empty|| speciality == string.Empty || group == string.Empty) { throw new NotImplementedException(); }
             else
             {
-                Student newStudent = new Student(name, speciality, group);
+                Student newStudent = new Student(id,name, speciality, group);
                 students.Add(newStudent);
             }
         }
@@ -23,14 +23,14 @@ namespace BusinessLogic
         /// Удаление студента
         /// </summary>
         /// <param name="name">Имя</param>
-        public void RemoveStudent(string name)
+        public void RemoveStudent(int number)
         {
-            if (name == string.Empty)
+            if (students[number]==null)
             {
                 throw new NotImplementedException();
             }
             else {
-                var studentToRemove = students.FirstOrDefault(s => s.Name == name);
+                var studentToRemove = students[number];
                 if (studentToRemove != null)
                 {
                     students.Remove(studentToRemove);
@@ -47,14 +47,15 @@ namespace BusinessLogic
         /// <param name="name">Имя</param>
         /// <param name="newSpeciality">Новая Специальность</param>
         /// <param name="newGroup">Новая Группа</param>
-        public void UpdateStudent(string name, string newSpeciality, string newGroup)
+        public void UpdateStudent(int id, string name, string newSpeciality, string newGroup)
         {
-            if (name == string.Empty || newSpeciality == string.Empty || newGroup == string.Empty) { throw new NotImplementedException(); }
+            if (name == string.Empty || newSpeciality == string.Empty || newGroup == string.Empty|| id==null) { throw new NotImplementedException(); }
             else
             {
-                var studentToUpdate = students.FirstOrDefault(s => s.Name == name);
+                var studentToUpdate = students[id];
                 if (studentToUpdate != null)
                 {
+                    studentToUpdate.Name = name;
                     studentToUpdate.Speciality = newSpeciality;
                     studentToUpdate.Group = newGroup;
                 }
@@ -68,9 +69,21 @@ namespace BusinessLogic
         /// Метод возвращающий список всех студентов
         /// </summary>
         /// <returns>Список студентов</returns>
-        public List<Student> GetAllStudents()
+        public List<List<string>> GetAllStudents()
         {
-            return students;
+            List<List<string>> finallist = new List<List<string>>();
+            foreach (var student in students)
+            {
+                List<string> studentlist = new List<string>
+                {
+                    student.Id.ToString(),
+                    student.Name,
+                    student.Speciality,
+                    student.Group
+                };
+                finallist.Add(studentlist);
+            }
+            return finallist;
         }
         /// <summary>
         /// Метод возвращающий словарь на основе специальностей

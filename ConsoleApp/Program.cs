@@ -2,6 +2,7 @@
 using System.Drawing;
 using Spectre.Console;
 using System.Collections.Generic;
+
 namespace ConsoleApp
 {
     internal class Program
@@ -58,10 +59,13 @@ namespace ConsoleApp
 
             Console.Write("Введите группу студента: ");
             string group = Console.ReadLine();
-            try {logic.AddStudent(name, speciality, group); }
+
+            int numberofstudent = logic.GetAllStudents().Count();
+
+            try {logic.AddStudent(numberofstudent,name, speciality, group); }
             catch
             {
-                Console.WriteLine("Ошибка! Одно из полей пустое");
+                Console.WriteLine("Ошибка!");
                 return;
             }
             Console.WriteLine("Студент добавлен.");
@@ -72,10 +76,17 @@ namespace ConsoleApp
         /// <param name="logic">Бизнес логика</param>
         static void RemoveStudent(Logic logic)
         {
-            Console.Write("Введите имя студента для удаления: ");
-            string name = Console.ReadLine();
 
-            try { logic.RemoveStudent(name); }
+            Console.Write("Введите номер студента для удаления: \n");
+            int i = 0;
+            foreach(var student in logic.GetAllStudents())
+            {
+                Console.WriteLine($"Номер {i}, Имя:{student[0]} Специальность:{student[1]} Группа:{student[2]}");
+                i++;
+            }
+            int chosennumber = Convert.ToInt32(Console.ReadLine());
+
+            try {logic.RemoveStudent(chosennumber); }
             catch
             {
                 Console.WriteLine("Ошибка!");
@@ -89,7 +100,16 @@ namespace ConsoleApp
         /// <param name="logic">Бизнес логика</param>
         static void UpdateStudent(Logic logic)
         {
-            Console.Write("Введите имя студента для изменения: ");
+            Console.WriteLine("Выберите номер студента для изменения:");
+            int i = 0;
+            foreach(var student in logic.GetAllStudents())
+            {
+                Console.WriteLine($"Номер {i}, Имя:{student[0]} Специальность:{student[1]} Группа:{student[2]}");
+                i++;
+            }
+            int chosennumber = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите новое имя студента: ");
             string name = Console.ReadLine();
 
             Console.Write("Введите новую специальность: ");
@@ -99,7 +119,7 @@ namespace ConsoleApp
 
             string group = Console.ReadLine();
 
-            try { logic.UpdateStudent(name, speciality, group); }
+            try { logic.UpdateStudent(chosennumber,name, speciality, group); }
             catch
             {
                 Console.WriteLine("Ошибка! Одно из полей пустое");
@@ -118,7 +138,7 @@ namespace ConsoleApp
             {
                 foreach (var student in logic.GetAllStudents())
                 {
-                    Console.WriteLine($"Имя: {student.Name}, Специальность: {student.Speciality}, Группа: {student.Group}");
+                    Console.WriteLine($"Имя: {student[0]}, Специальность: {student[1]}, Группа: {student[2]}");
                 }
             }
             else

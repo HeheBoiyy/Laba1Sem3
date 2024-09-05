@@ -1,5 +1,4 @@
 using BusinessLogic;
-using Model;
 namespace WinFormsApp
 {
     public partial class MainForm : Form
@@ -23,8 +22,9 @@ namespace WinFormsApp
             listViewStudents.FullRowSelect = true;
             listViewStudents.GridLines = true;
             listViewStudents.Columns.Clear();
-            listViewStudents.Columns.Add("Имя", 150);
-            listViewStudents.Columns.Add("Специальность", 150);
+            listViewStudents.Columns.Add("Номер", 100);
+            listViewStudents.Columns.Add("Имя", 100);
+            listViewStudents.Columns.Add("Специальность", 100);
             listViewStudents.Columns.Add("Группа", 100);
         }
 
@@ -37,9 +37,10 @@ namespace WinFormsApp
 
             foreach (var student in logic.GetAllStudents())
             {
-                var item = new ListViewItem(student.Name);
-                item.SubItems.Add(student.Speciality);
-                item.SubItems.Add(student.Group);
+                var item = new ListViewItem(student[0]);
+                item.SubItems.Add(student[1]);
+                item.SubItems.Add(student[2]);
+                item.SubItems.Add(student[3]);
                 listViewStudents.Items.Add(item);
             }
         }
@@ -67,9 +68,8 @@ namespace WinFormsApp
                 MessageBox.Show("Зачем просто так тыкать на кнопку?");
                 return;
             }
-            var SelectedItem = listViewStudents.SelectedItems[0];
-            string name = SelectedItem.Text;
-            logic.RemoveStudent(name);
+            int SelectedNum = listViewStudents.SelectedItems[0].Index;
+            logic.RemoveStudent(SelectedNum);
             RefreshStudentList();
             
         }
@@ -89,7 +89,7 @@ namespace WinFormsApp
                 MessageBox.Show("Зачем просто так тыкать на кнопку?");
                 return;
             }
-            var updateForm = new UpdateStudentForm(logic, listViewStudents.SelectedItems[0].Text);
+            var updateForm = new UpdateStudentForm(logic, listViewStudents.SelectedItems[0].Index);
             updateForm.ShowDialog();
             RefreshStudentList();
         }
@@ -124,11 +124,13 @@ namespace WinFormsApp
         private void RefreshStudentList()
         {
             listViewStudents.Items.Clear();
+
             foreach (var student in logic.GetAllStudents())
             {
-                var item = new ListViewItem(student.Name);
-                item.SubItems.Add(student.Speciality);
-                item.SubItems.Add(student.Group);
+                var item = new ListViewItem(student[0]);
+                item.SubItems.Add(student[1]);
+                item.SubItems.Add(student[2]);
+                item.SubItems.Add(student[3]);
                 listViewStudents.Items.Add(item);
             }
         }
