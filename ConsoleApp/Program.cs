@@ -14,7 +14,7 @@ namespace ConsoleApp
 
             do
             {
-                Console.WriteLine("\nВведите команду: 1.Add, 2.Remove, 3.Update, 4.List, 5.Distribution, 6.Exit");
+                Console.WriteLine("\nВведите команду: 1.Add, 2.Remove, 3.Update, 4.List, 5.Distribution, 6.Exit programm");
                 command = Console.ReadLine().ToLower();
 
                 switch (command)
@@ -40,6 +40,9 @@ namespace ConsoleApp
                         }
                         var data = logic.GetSpecialityDistribution();
                         ShowDistribution(data);
+                        break;
+                    case "6":
+                        Environment.Exit(0);
                         break;
                 }
             } while (command != "exit");
@@ -76,23 +79,30 @@ namespace ConsoleApp
         /// <param name="logic">Бизнес логика</param>
         static void RemoveStudent(Logic logic)
         {
-
-            Console.Write("Введите номер студента для удаления: \n");
-            int i = 0;
-            foreach(var student in logic.GetAllStudents())
+            if (logic.GetAllStudents().Count==0)
             {
-                Console.WriteLine($"Номер {i}, Имя:{student[0]} Специальность:{student[1]} Группа:{student[2]}");
-                i++;
-            }
-            int chosennumber = Convert.ToInt32(Console.ReadLine());
-
-            try {logic.RemoveStudent(chosennumber); }
-            catch
-            {
-                Console.WriteLine("Ошибка!");
+                Console.WriteLine("Список студентов пуст!");
                 return;
             }
-            Console.WriteLine("Студент удален.");
+            else
+            {
+                Console.Write("Введите номер студента для удаления: \n");
+                int i = 0;
+                foreach (var student in logic.GetAllStudents())
+                {
+                    Console.WriteLine($"Номер {i}, Имя:{student[1]} Специальность:{student[2]} Группа:{student[3]}");
+                    i++;
+                }
+                int chosennumber = Convert.ToInt32(Console.ReadLine());
+
+                try { logic.RemoveStudent(chosennumber); }
+                catch
+                {
+                    Console.WriteLine("Ошибка!");
+                    return;
+                }
+                Console.WriteLine("Студент удален.");
+            }
         }
         /// <summary>
         /// Функция для обновления студента через КОНСОЛЬ(QoL функция)
@@ -101,31 +111,40 @@ namespace ConsoleApp
         static void UpdateStudent(Logic logic)
         {
             Console.WriteLine("Выберите номер студента для изменения:");
-            int i = 0;
-            foreach(var student in logic.GetAllStudents())
+            if (logic.GetAllStudents().Count == 0)
             {
-                Console.WriteLine($"Номер {i}, Имя:{student[0]} Специальность:{student[1]} Группа:{student[2]}");
-                i++;
-            }
-            int chosennumber = Convert.ToInt32(Console.ReadLine());
-
-            Console.Write("Введите новое имя студента: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Введите новую специальность: ");
-            string speciality = Console.ReadLine();
-
-            Console.Write("Введите новую группу: ");
-
-            string group = Console.ReadLine();
-
-            try { logic.UpdateStudent(chosennumber,name, speciality, group); }
-            catch
-            {
-                Console.WriteLine("Ошибка! Одно из полей пустое");
+                Console.WriteLine("Сипсок студентов пуст!");
                 return;
             }
-            Console.WriteLine("Данные студента обновлены.");
+            else
+            {
+                int i = 0;
+                foreach (var student in logic.GetAllStudents())
+                {
+                    Console.WriteLine($"Номер {i}, Имя:{student[1]} Специальность:{student[2]} Группа:{student[3]}");
+                    i++;
+                }
+                int chosennumber = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Введите новое имя студента: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Введите новую специальность: ");
+                string speciality = Console.ReadLine();
+
+                Console.Write("Введите новую группу: ");
+
+                string group = Console.ReadLine();
+
+                try { logic.UpdateStudent(chosennumber, name, speciality, group); }
+                catch
+                {
+                    Console.WriteLine("Ошибка! Одно из полей пустое");
+                    return;
+                }
+                Console.WriteLine("Данные студента обновлены.");
+            }
+            
         }
         /// <summary>
         /// Функция для получения списка студентов через КОНСОЛЬ(QoL функция)
