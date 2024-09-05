@@ -47,17 +47,26 @@ namespace BusinessLogic
         /// <param name="name">Имя</param>
         /// <param name="newSpeciality">Новая Специальность</param>
         /// <param name="newGroup">Новая Группа</param>
-        public void UpdateStudent(int id, string name, string newSpeciality, string newGroup)
+        public void UpdateStudent(int id, string newname, string newSpeciality, string newGroup)
         {
-            if (name == string.Empty || newSpeciality == string.Empty || newGroup == string.Empty|| id==null) { throw new NotImplementedException(); }
+            if (id==null) { throw new NotImplementedException(); }
             else
             {
                 var studentToUpdate = students[id];
                 if (studentToUpdate != null)
                 {
-                    studentToUpdate.Name = name;
-                    studentToUpdate.Speciality = newSpeciality;
-                    studentToUpdate.Group = newGroup;
+                    if (newname != string.Empty)
+                    {
+                        studentToUpdate.Name = newname;
+                    }
+                    if(newSpeciality != string.Empty)
+                    {
+                        studentToUpdate.Speciality = newSpeciality;
+                    }
+                    if(newGroup != string.Empty)
+                    {
+                        studentToUpdate.Group = newGroup;
+                    }
                 }
                 else
                 {
