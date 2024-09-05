@@ -1,4 +1,7 @@
 ﻿using BusinessLogic;
+using System.Drawing;
+using Spectre.Console;
+using System.Collections.Generic;
 namespace ConsoleApp
 {
     internal class Program
@@ -28,7 +31,8 @@ namespace ConsoleApp
                         ListStudents(logic);
                         break;
                     case "5":
-                        ShowDistribution(logic);
+                        var data = logic.GetSpecialityDistribution();
+                        ShowDistribution(data);
                         break;
                 }
             } while (command != "exit");
@@ -98,13 +102,15 @@ namespace ConsoleApp
         /// Функция для вывода гистраграммы через КОНСОЛЬ(не QoL функция)
         /// </summary>
         /// <param name="logic">Бизнес логика</param>
-        static void ShowDistribution(Logic logic)
+        static void ShowDistribution(Dictionary<string,int> data)
         {
-            Console.WriteLine("Распределение студентов по специальностям:");
-            foreach (var entry in logic.GetSpecialityDistribution())
+            var chart = new BarChart().Width(60).Label("[green bold]Гистограмма[/]");
+            foreach (var entry in data)
             {
-                Console.WriteLine($"Специальность: {entry.Key}, Количество студентов: {entry.Value}");
+                chart.AddItem(entry.Key, entry.Value,Spectre.Console.Color.Aqua);
             }
+
+            AnsiConsole.Write(chart);
         }
 
     }
