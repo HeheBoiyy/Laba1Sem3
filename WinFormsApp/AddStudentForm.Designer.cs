@@ -118,6 +118,9 @@
             Controls.Add(txtSpeciality);
             Controls.Add(txtName);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "AddStudentForm";
             Text = "Form2";
             ResumeLayout(false);

@@ -3,6 +3,7 @@ namespace WinFormsApp
 {
     public partial class MainForm : Form
     {
+        
         private Logic logic = new Logic();
         /// <summary>
         /// Конструктор для инициализации объекта MainForm

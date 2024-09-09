@@ -93,6 +93,9 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(listViewStudents);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "MainForm";
             Text = "MainForm";
             ResumeLayout(false);

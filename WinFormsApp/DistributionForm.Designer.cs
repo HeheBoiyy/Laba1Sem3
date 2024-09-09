@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             chartSpeciality = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)chartSpeciality).BeginInit();
             SuspendLayout();
             // 
             // chartSpeciality
             // 
-            chartArea2.Name = "ChartArea1";
-            chartSpeciality.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chartSpeciality.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            chartSpeciality.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartSpeciality.Legends.Add(legend1);
             chartSpeciality.Location = new Point(18, 15);
             chartSpeciality.Name = "chartSpeciality";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chartSpeciality.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartSpeciality.Series.Add(series1);
             chartSpeciality.Size = new Size(765, 410);
             chartSpeciality.TabIndex = 0;
             chartSpeciality.Text = "chart1";
@@ -57,6 +57,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(chartSpeciality);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "DistributionForm";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)chartSpeciality).EndInit();
