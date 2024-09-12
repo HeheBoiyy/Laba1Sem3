@@ -67,11 +67,13 @@ namespace BusinessLogic
                     {
                         studentToUpdate.Group = newGroup;
                     }
+                    students[id] = studentToUpdate;
                 }
                 else
                 {
                     throw new NotImplementedException();
                 }
+                
             }
         }
         /// <summary>

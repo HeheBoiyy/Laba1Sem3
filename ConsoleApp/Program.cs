@@ -124,25 +124,34 @@ namespace ConsoleApp
                     Console.WriteLine($"Номер {i}, Имя:{student[1]} Специальность:{student[2]} Группа:{student[3]}");
                     i++;
                 }
-                int chosennumber = Convert.ToInt32(Console.ReadLine());
 
-                Console.Write("Введите новое имя студента: ");
-                string name = Console.ReadLine();
-
-                Console.Write("Введите новую специальность: ");
-                string speciality = Console.ReadLine();
-
-                Console.Write("Введите новую группу: ");
-
-                string group = Console.ReadLine();
-
-                try { logic.UpdateStudent(chosennumber, name, speciality, group); }
-                catch
+                string chosennumber = Console.ReadLine();
+                
+                
+                if (chosennumber != string.Empty)
                 {
-                    Console.WriteLine("Ошибка! Одно из полей пустое");
-                    return;
+                    Console.Write("Введите новое имя студента: ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Введите новую специальность: ");
+                    string speciality = Console.ReadLine();
+
+                    Console.Write("Введите новую группу: ");
+
+                    string group = Console.ReadLine();
+
+                    try { logic.UpdateStudent(Convert.ToInt32(chosennumber), name, speciality, group); }
+                    catch
+                    {
+                        Console.WriteLine("Ошибка! Одно из полей пустое");
+                        return;
+                    }
+                    Console.WriteLine("Данные студента обновлены.");
                 }
-                Console.WriteLine("Данные студента обновлены.");
+                else
+                {
+                    Console.WriteLine("Ошибка");
+                }
             }
             
         }
@@ -157,7 +166,7 @@ namespace ConsoleApp
             {
                 foreach (var student in logic.GetAllStudents())
                 {
-                    Console.WriteLine($"Имя: {student[0]}, Специальность: {student[1]}, Группа: {student[2]}");
+                    Console.WriteLine($"Имя: {student[1]}, Специальность: {student[2]}, Группа: {student[3]}");
                 }
             }
             else
